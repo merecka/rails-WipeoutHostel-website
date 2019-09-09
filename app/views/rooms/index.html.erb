@@ -1,0 +1,5 @@
+<h1>Rooms List</h1>
+
+<% @rooms.each do |room| %>
+<h3><%= link_to room.name.capitalize,room_path(room) %></h3>
+	<% end %>

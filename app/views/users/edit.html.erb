@@ -1,0 +1,18 @@
+<h1>Edit an Existing User</h1>
+
+<%= form_for @user do |f| %>
+  <%= f.label "Name" %><br />
+  <%= f.text_field :name %><br />
+  <%= f.label "email" %><br />
+  <%= f.text_field :email %><br />
+  <%= f.label "telephone" %><br />
+  <%= f.text_field :telephone %><br />
+  <%= f.label "Password" %><br />
+  <%= f.password_field :password %><br />
+  <%= f.label "Password Confirmation" %><br />
+  <%= f.password_field :password_confirmation %><br />
+  <%= f.label "Admin?" %> <br />
+  <%= f.check_box :admin, {}, true, false %><br />
+  <br />
+  <%= f.submit "Save Changes" %>
+<% end %>

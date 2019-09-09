@@ -1,0 +1,11 @@
+<h1>Edit a Room</h1>
+
+<%= form_for @room do |f| %>
+  <%= f.label "Name" %><br />
+  <%= f.text_field :name %><br />
+  <%= f.label "Occupancy" %><br />
+  <%= f.text_field :occupancy %><br />
+  <%= f.label "Cost" %><br />
+  <%= f.text_field :cost %><br />
+  <%= f.submit "Update Room" %>
+<% end %>

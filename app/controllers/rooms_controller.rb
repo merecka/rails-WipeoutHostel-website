@@ -6,6 +6,8 @@ class RoomsController < ApplicationController
 
   def show
   	if session[:current_user_id]
+      @user = current_user
+      @reservation = Reservation.new
   		@room = Room.find_by(id: params[:id])
   	else
   		redirect_to '/login'
@@ -20,14 +22,18 @@ class RoomsController < ApplicationController
     @room = Room.create(room_params)
     if @room
     	# Redirects to the Rooms's show page
-    	redirect_to rooms_path(@room)
+    	redirect_to room_path(@room)
     else
     	render :new
     end
   end
 
   def edit
-	@room = Room.find_by(id: params[:id])
+    if current_user.admin == true
+	     @room = Room.find_by(id: params[:id])
+    else
+      redirect_to rooms_path
+    end
   end
 
   def update

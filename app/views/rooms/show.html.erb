@@ -1,7 +1,19 @@
 <h1><%= @room.name.capitalize %></h1>
 
-<h3>Occupancy: <%= @room.occupancy %></h3>
+<h3>Occupancy (# of Guests): <%= @room.occupancy %></h3>
 
-<h3>Cost Per Night: <%= @room.cost %></h3>
+<h3>Cost Per Night: $<%= @room.cost %></h3>
 
-<h3>Current Reservations: </h3>
+<% if !@user.admin  %>
+	<%= form_for @reservation do |f| %>
+		<%= f.hidden_field(:room_id, :value => @room.id) %>
+		<%= f.hidden_field(:user_id, :value => @user.id) %>
+		<%= f.submit "Reserve This Room" %>
+	<% end %>
+<% end %>
+
+
+<% if @user.admin %>
+	<h3>Current Reservations: </h3>
+	<%= link_to "Edit Room", edit_room_path(@room) %>
+<% end %>

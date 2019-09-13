@@ -1,0 +1,11 @@
+<h1>Reservation Info</h1>
+
+<h2>Guest Name:  <%= @reservation.user.name %></h2>
+<h2>Room Name:  <%= @reservation.room.name %></h2>
+<h2>Number of Guests:  <%= @reservation.guests %></h2>
+<h2>Check-In Date:  <%= @reservation.check_in %></h2>
+<h2>Check-Out Date:  <%= @reservation.check_out %></h2>
+<% if @reservation.user.admin == true %>
+<h2>Discount Awarded:  <%= @reservation.discount %></h2>
+<% end %>
+<h2>Total ($):  <%= @reservation.total %></h2>

@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   def show
   	if session[:current_user_id]
   		@reservations = Reservation.all
-  		@user = self.current_user
+  		@user = User.find_by(id: params[:id])
   	else
   		redirect_to '/'
   	end

@@ -1,14 +1,20 @@
-<h1>Reservation Info</h1>
+<h1>Reservation Info:</h1>
 
-<h3>Guest Name:  <%= @reservation.user.name %></h3>
-<h3>Room Name:  <%= @reservation.room.name %></h3>
+<h3>Guest: <%= link_to("#{@reservation.user.name}", user_path(@reservation.user)) %></h3>
+<h3>Room: <%= link_to("#{@reservation.room.name}", room_path(@reservation.room)) %></h3>
 <h3>Number of Guests:  <%= @reservation.guests %></h3>
 <h3>Check-In Date:  <%= @reservation.check_in %></h3>
 <h3>Check-Out Date:  <%= @reservation.check_out %></h3>
-<% if @reservation.user.admin == true %>
+<h3>Days:  <%= days(@reservation) %></h3>
+<% if current_user.admin %>
 <h3>Discount Awarded:  <%= @reservation.discount %></h3>
 <% end %>
-<h3>Total ($):  <%= @reservation.total %></h3><br> 
+<h3>Total ($):  <%= @reservation.total %></h3><br>
+
+<% if current_user.admin %>
+	<%= link_to "Edit Reservation", edit_reservation_path(@reservation) %><br><br>
+	<%= link_to "Delete Reservation", @reservation, method: :delete, data: {confirm: "Are You Sure?" } %>
+<% end %><br><br><br><br>
 
 
 <%= link_to "Back to Your Account", user_path(current_user) %>

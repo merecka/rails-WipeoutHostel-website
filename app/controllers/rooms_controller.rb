@@ -9,6 +9,7 @@ class RoomsController < ApplicationController
       @user = current_user
       @reservation = Reservation.new
   		@room = Room.find_by(id: params[:id])
+      @rooms = Room.all
   	else
   		redirect_to '/login'
   	end

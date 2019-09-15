@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2019_09_10_131424) do
     t.date "check_out"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.decimal "discount"
+    t.decimal "discount", default: "0.0"
     t.decimal "total"
   end
 

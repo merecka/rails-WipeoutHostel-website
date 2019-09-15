@@ -35,7 +35,9 @@ class ReservationsController < ApplicationController
 
   def edit
     if current_user.admin == true
-	     @reservation = Reservation.find_by(id: params[:id])
+      @user = current_user
+	    @reservation = Reservation.find_by(id: params[:id])
+      @room = @reservation.room
     else
       redirect_to reservations_path
     end
@@ -43,14 +45,16 @@ class ReservationsController < ApplicationController
 
   def update
   	@reservation = Reservation.find_by(id: params[:id])
-    total_cost = (@reservation.room.cost * @reservation.guests)
-  	@reservation.update(user_id: reservation_params[:user_id], room_id: reservation_params[:room_id], guests: reservation_params[:guests], check_in: reservation_params[:check_in], check_out: reservation_params[:check_out], discount: reservation_params[:discount], total: total_cost)
-  	redirect_to reservation_path(@reservation)
+  	@reservation.update(user_id: reservation_params[:user_id], room_id: reservation_params[:room_id], guests: reservation_params[:guests], check_in: reservation_params[:check_in], check_out: reservation_params[:check_out], discount: reservation_params[:discount])
+  	days = (@reservation.check_out - @reservation.check_in).to_i
+    total_cost = @reservation.room.cost * days * (1-@reservation.discount)
+    @reservation.update(total: total_cost)
+    redirect_to reservation_path(@reservation)
   end
 
   def destroy
   	Reservation.find_by(id: params[:id]).destroy
-  	redirect_to reservations_path
+  	redirect_to user_path(current_user)
   end
 
   private

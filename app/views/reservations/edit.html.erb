@@ -1,12 +1,19 @@
 <h1>Make a New Reservation</h1>
 
 <%= form_for @reservation do |f| %>
-	Guest: <%= current_user.name.capitalize %><br>
-	<%= f.hidden_field(:user_id, :value => @user.id) %>
+	Guest: <%= current_user.name.titleize %><br>
+	<%= f.hidden_field(:user_id, :value => @reservation.user.id) %>
 	Room: <%= @room.name.capitalize %><br>
 	<%= f.hidden_field(:room_id, :value => @room.id) %>
 	# of Guests: <%= f.number_field(:guests, min: 1, max: @room.occupancy) %><br>
 	Check-In Date:  <%= f.date_field(:check_in) %><br>
 	Check-Out Date: <%= f.date_field(:check_out) %><br>
+
+	<% if current_user.admin == true %>
+		Discount (0 - 1): <%= f.number_field(:discount, min: 0, max: 1, step: 0.01) %><br>
+	<% else %>
+		<%= f.hidden_field(:discount, :value => 0) %>
+	<% end %>
+
 	<%= f.submit "Reserve This Room" %>
 <% end %>

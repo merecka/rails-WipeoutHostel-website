@@ -1,6 +1,6 @@
 <h1><%= @room.name.capitalize %></h1>
 
-<h3>Occupancy (# of Guests): <%= @room.occupancy %></h3>
+<h3>Max Occupancy (# of Guests): <%= @room.occupancy %></h3>
 
 <h3>Cost Per Night: $<%= @room.cost %></h3>
 
@@ -15,5 +15,12 @@
 
 <% if @user.admin %>
 	<h3>Current Reservations: </h3>
+	<ul>
+	<% @room.reservations.each do |reservation| %>
+		<li><%= link_to("Check-In Date: #{reservation.check_in} - Days: #{days(reservation)}", reservation_path(reservation)) %>
+	<% end %>
+	</ul><br><br>
 	<%= link_to "Edit Room", edit_room_path(@room) %>
-<% end %>
+<% end %><br><br>
+
+<%= link_to "Back to Your Account", user_path(current_user) %>

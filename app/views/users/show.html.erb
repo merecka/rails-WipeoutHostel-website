@@ -1,16 +1,25 @@
-<h1>Welcome <%= @user.name.titleize %></h1><br>
+<h1>Welcome, <%= @user.name.titleize %>.</h1><br>
 
-<h2>Your Account Info</h2>
+<h2>Your Account Info:</h2>
 <h4>Email: <%= @user.email %></h4>
 <h4>Telephone: <%= @user.telephone %></h4><br>
 
-<h3><%=link_to "View Available Rooms", rooms_path %></h3>
+<h3><%=link_to "View Available Rooms", rooms_path %></h3><br>
 
+<% if current_user.admin != true %>
 <h3>Here are your reservations:</h3>
 
-<% current_user.reservations.each do |reservation| %>
-	<%= link_to "Check-In Date:  #{reservation.check_in}", reservation_path(reservation) %><br>
-<% end %><br><br><br>
+	<% current_user.reservations.each do |reservation| %>
+		<%= link_to "Check-In Date:  #{reservation.check_in}", reservation_path(reservation) %><br>
+	<% end %><br><br><br>
+
+<% else %>
+<h3>Current Reservations:</h3>
+	<%  @reservations.each do |reservation| %>
+		<%= link_to "#{reservation.room.name}  -  Check-In Date: #{reservation.check_in}", reservation_path(reservation) %><br>
+	<% end %>
+<% end %><br><br>
+
 
 
 <%= link_to "Log Out", '/logout' %>

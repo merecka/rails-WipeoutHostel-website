@@ -1,11 +1,14 @@
 <h1>Reservation Info</h1>
 
-<h2>Guest Name:  <%= @reservation.user.name %></h2>
-<h2>Room Name:  <%= @reservation.room.name %></h2>
-<h2>Number of Guests:  <%= @reservation.guests %></h2>
-<h2>Check-In Date:  <%= @reservation.check_in %></h2>
-<h2>Check-Out Date:  <%= @reservation.check_out %></h2>
+<h3>Guest Name:  <%= @reservation.user.name %></h3>
+<h3>Room Name:  <%= @reservation.room.name %></h3>
+<h3>Number of Guests:  <%= @reservation.guests %></h3>
+<h3>Check-In Date:  <%= @reservation.check_in %></h3>
+<h3>Check-Out Date:  <%= @reservation.check_out %></h3>
 <% if @reservation.user.admin == true %>
-<h2>Discount Awarded:  <%= @reservation.discount %></h2>
+<h3>Discount Awarded:  <%= @reservation.discount %></h3>
 <% end %>
-<h2>Total ($):  <%= @reservation.total %></h2>
+<h3>Total ($):  <%= @reservation.total %></h3><br> 
+
+
+<%= link_to "Back to Your Account", user_path(current_user) %>

@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
 
   def create
   #Sets the session during User login 
-    user = User.find_by(name: params[:name])
+    user = User.find_by(id: params[:user][:id])
     if user
       user.authenticate(params[:password])
       session[:current_user_id] = user.id

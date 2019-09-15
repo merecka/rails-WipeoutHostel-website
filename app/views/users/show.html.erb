@@ -1,4 +1,4 @@
-<h1>Welcome <%= @user.name.capitalize %></h1><br>
+<h1>Welcome <%= @user.name.titleize %></h1><br>
 
 <h2>Your Account Info</h2>
 <h4>Email: <%= @user.email %></h4>
@@ -7,3 +7,10 @@
 <h3><%=link_to "View Available Rooms", rooms_path %></h3>
 
 <h3>Here are your reservations:</h3>
+
+<% current_user.reservations.each do |reservation| %>
+	<%= link_to "Check-In Date:  #{reservation.check_in}", reservation_path(reservation) %><br>
+<% end %><br><br><br>
+
+
+<%= link_to "Log Out", '/logout' %>

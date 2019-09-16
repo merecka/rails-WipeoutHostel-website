@@ -1,2 +1,5 @@
 <h1>Current Reservations:</h1>
 
+<% @reservations.each do |reservation| %>
+	<%= link_to "#{reservation.room.name}  -  Check-In Date: #{reservation.check_in}", reservation_path(reservation) %><br>
+<% end %>

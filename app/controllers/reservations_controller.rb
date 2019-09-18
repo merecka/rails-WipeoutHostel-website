@@ -1,11 +1,11 @@
 class ReservationsController < ApplicationController
 
   def index
-    if current_user.admin
-      # provide a list of users and rooms to the view for the filter control
+    @user = current_user
+    if @user.admin
+      # provide a list of users and rooms to the view for the filter control - only for admins
       @users = User.all
       @rooms = Room.all
-
 
       # filter the @reservations list based on user input
       if !params[:user_id].blank? && !params[:room_id].blank?
@@ -22,7 +22,7 @@ class ReservationsController < ApplicationController
     	  @reservations = Reservation.all
       end
     else
-      redirect_to user_path(current_user)
+      @reservations = User.find_by(id: @user.id).reservations
     end
 
   end

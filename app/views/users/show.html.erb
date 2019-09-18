@@ -4,21 +4,10 @@
 <h4>Email: <%= @user.email %></h4>
 <h4>Telephone: <%= @user.telephone %></h4><br>
 
-<h3><%=link_to "View Available Rooms", rooms_path %></h3>
+<h3><%=link_to "View Available Rooms", rooms_path %></h3><br>
 
-<% if !current_user.admin  %>
-	<br><h3>Here are your reservations:</h3>
+<h3><%= link_to "View Reservations", user_reservations_path(current_user) %></h3><br>
 
-		<% current_user.reservations.each do |reservation| %>
-			<%= link_to "Check-In Date:  #{reservation.check_in}", reservation_path(reservation) %><br>
-		<% end %><br><br><br>
-
-<% else %>
-	<h3><%= link_to "View Reservations", '/reservations' %></h3><br>
-
-	<%= link_to "Back to Your Account", user_path(current_user) %>
-<% end %><br><br>
-
-
+<h3><%= link_to "Back to Your Account", user_path(current_user) %></h3><br><br>
 
 <%= link_to "Log Out", '/logout' %>

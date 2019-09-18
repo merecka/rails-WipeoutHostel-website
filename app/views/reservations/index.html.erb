@@ -1,20 +1,32 @@
 <h1>Current Reservations:</h1>
 
 <div>
+<% if current_user.admin %>
   <h3>Filter Reservations:</h3>
   <%= form_tag("/reservations", method: "get") do %>
     <%= select_tag "user_id", options_from_collection_for_select(@users, "id", "name"), include_blank: true %>
     <%= select_tag "room_id", options_from_collection_for_select(@rooms, "id", "name"), include_blank: true %>
     <%= submit_tag "Filter" %>
   <% end %>
+
+  <div>
+  <ul>	
+	<% @reservations.each do |reservation| %>
+		<li><%= link_to "#{reservation.room.name}  -  Check-In Date: #{reservation.check_in}", reservation_path(reservation) %><br>
+	<% end %>
+  </ul>
+  </div>
+
+ <% else %>
+	<div>
+	<ul>	
+	<% @reservations.each do |reservation| %>
+		<li><%= link_to "#{reservation.room.name}  -  Check-In Date: #{reservation.check_in}", reservation_path(reservation) %><br>
+	<% end %>
+	</ul>
+	</div>
+<% end %>
 </div>
 
-<div>
-<ul>	
-<% @reservations.each do |reservation| %>
-	<li><%= link_to "#{reservation.room.name}  -  Check-In Date: #{reservation.check_in}", reservation_path(reservation) %><br>
-<% end %>
-</ul>
-</div>
 
 <br><br><%= link_to "Back to Your Account", user_path(current_user) %>

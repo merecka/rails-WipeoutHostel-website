@@ -3,6 +3,10 @@ Rails.application.routes.draw do
 
   root to: 'application#index'
 
+  resources :users, only: [:show] do
+  	resources :reservations, only: [:show, :index]
+  end
+
   resources :users
   resources :rooms
   resources :reservations

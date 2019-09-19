@@ -7,11 +7,17 @@
 <h4>Facebook UID: <%= @user.uid %></h4>
 <img src="<%= @user.image %>">
 <% end %>
+<h4>Admin?: <%= @user.admin? %></h4><br>
 
-<h4><%=link_to "View Available Rooms", rooms_path %></h4><br>
 
-<h4><%= link_to "View Reservations", user_reservations_path(current_user) %></h4><br>
+<h4><%=link_to "View Available Rooms", rooms_path %></h4>
 
-<h4><%= link_to "Back to Your Account", user_path(current_user) %></h4><br><br>
+<h4><%= link_to "View Reservations", user_reservations_path(current_user) %></h4>
+
+<h4><%= link_to "View User Accounts", users_path %></h4><br><br>
+
+<h4><%= link_to "Back to Your Account", user_path(current_user) %></h4>
+
+
 
 <%= link_to "Log Out", '/logout' %>

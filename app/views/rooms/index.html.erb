@@ -2,4 +2,6 @@
 
 <% @rooms.each do |room| %>
 	<h3><%= link_to room.name.capitalize, room_path(room) %></h3>
-<% end %>
+<% end %><br>
+
+<h4><%= link_to "Back to Your Account", user_path(current_user) %></h4>

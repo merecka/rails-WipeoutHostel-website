@@ -6,10 +6,10 @@ class SessionsController < ApplicationController
 
   def create
     if auth != nil
-    #Login or (or creates) a User from Facebook login via Omniauth
+    #Login or creates a User from Facebook login via Omniauth
       @user = User.find_by(uid: auth['uid'])
       if @user
-        #Sets the User session if a User with the submitted UID exists
+        #Log's in the User (sets User session) if a User with the submitted UID exists
         session[:current_user_id] = @user.id
         redirect_to user_path(@user)
       else
@@ -26,7 +26,7 @@ class SessionsController < ApplicationController
       end 
 
     else
-    #Sets the session via manual User login 
+    #Sets the session via a manual User login
       user = User.find_by(id: params[:user][:id])
       if user
         user.authenticate(params[:password])

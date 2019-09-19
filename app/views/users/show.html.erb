@@ -8,10 +8,10 @@
 <img src="<%= @user.image %>">
 <% end %>
 
-<h3><%=link_to "View Available Rooms", rooms_path %></h3><br>
+<h4><%=link_to "View Available Rooms", rooms_path %></h4><br>
 
-<h3><%= link_to "View Reservations", user_reservations_path(current_user) %></h3><br>
+<h4><%= link_to "View Reservations", user_reservations_path(current_user) %></h4><br>
 
-<h3><%= link_to "Back to Your Account", user_path(current_user) %></h3><br><br>
+<h4><%= link_to "Back to Your Account", user_path(current_user) %></h4><br><br>
 
 <%= link_to "Log Out", '/logout' %>

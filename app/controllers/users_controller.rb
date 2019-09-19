@@ -33,9 +33,9 @@ class UsersController < ApplicationController
   end
 
   def update
-	@user = User.find_by(id: params[:id])
-	@user.update(name: user_params[:name], email: user_params[:email], telephone: user_params[:telephone], password: user_params[:password], password_confirmation: user_params[:password_confirmation])
-  redirect_to user_path(@user)
+  	@user = User.find_by(id: params[:id])
+  	@user.update(name: user_params[:name], email: user_params[:email], telephone: user_params[:telephone], password: user_params[:password], password_confirmation: user_params[:password_confirmation])
+    redirect_to user_path(@user)
   end
 
   def destroy

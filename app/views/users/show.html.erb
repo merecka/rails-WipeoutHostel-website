@@ -2,7 +2,11 @@
 
 <h2>Your Account Info:</h2>
 <h4>Email: <%= @user.email %></h4>
-<h4>Telephone: <%= @user.telephone %></h4><br>
+<h4>Telephone: <%= @user.telephone %></h4>
+<% if !@user.uid.blank? && !@user.image.blank? %>
+<h4>Facebook UID: <%= @user.uid %></h4>
+<img src="<%= @user.image %>">
+<% end %>
 
 <h3><%=link_to "View Available Rooms", rooms_path %></h3><br>
 

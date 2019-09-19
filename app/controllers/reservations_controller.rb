@@ -22,6 +22,7 @@ class ReservationsController < ApplicationController
     	  @reservations = Reservation.all
       end
     else
+      # displays all the User's reservations for a non-admin User
       @reservations = User.find_by(id: @user.id).reservations
     end
 

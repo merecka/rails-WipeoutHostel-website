@@ -3,7 +3,9 @@ Rails.application.routes.draw do
 
   root to: 'application#index'
 
-  resources :users, only: [:show] do
+  get '/auth/facebook/callback' => 'sessions#create'
+
+  resources :users do
   	resources :reservations, only: [:show, :index]
   end
 
@@ -14,4 +16,5 @@ Rails.application.routes.draw do
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   get '/logout' => 'sessions#destroy'
+
 end

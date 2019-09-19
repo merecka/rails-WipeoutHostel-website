@@ -38,9 +38,9 @@ class RoomsController < ApplicationController
   end
 
   def update
-	@room = Room.find_by(id: params[:id])
-	@room.update(name: room_params[:name], occupancy: room_params[:occupancy], cost: room_params[:cost])
-	redirect_to room_path(@room)
+  	@room = Room.find_by(id: params[:id])
+  	@room.update(name: room_params[:name], occupancy: room_params[:occupancy], cost: room_params[:cost])
+  	redirect_to room_path(@room)
   end
 
   def destroy

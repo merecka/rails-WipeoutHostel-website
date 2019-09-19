@@ -4,6 +4,10 @@ class UsersController < ApplicationController
   	@users = User.all
   end
 
+  def new
+    @user = User.new
+  end
+
   def show
   	if session[:current_user_id]
   		@reservations = Reservation.all
@@ -13,12 +17,8 @@ class UsersController < ApplicationController
   	end
   end
 
-  def new
-  	@user = User.new
-  end
-
   def create
-    @user = User.create(user_params)
+    @user = User.find_or_create_by(user_params)
     if @user
     	# Sets the User session and redirects to the User's show page
     	session[:current_user_id] = @user.id
@@ -35,7 +35,7 @@ class UsersController < ApplicationController
   def update
 	@user = User.find_by(id: params[:id])
 	@user.update(name: user_params[:name], email: user_params[:email], telephone: user_params[:telephone], password: user_params[:password], password_confirmation: user_params[:password_confirmation])
-	redirect_to user_path(@user)
+  redirect_to user_path(@user)
   end
 
   def destroy
@@ -46,7 +46,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :telephone, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :telephone, :image, :uid, :password, :password_confirmation)
   end
 
 end

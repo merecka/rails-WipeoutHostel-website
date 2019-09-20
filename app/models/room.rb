@@ -1,4 +1,8 @@
 class Room < ApplicationRecord
+	validates :name, presence: true, uniqueness: true
+	validates :occupancy, presence: true, numericality: { only_integer: true }
+	validates :cost, presence: true, numericality: true
+
 	has_many :reservations
 	has_many :users, through: :reservations
 

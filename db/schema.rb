@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 2019_09_18_205720) do
   create_table "reservations", force: :cascade do |t|
     t.integer "user_id"
     t.integer "room_id"
-    t.integer "guests"
+    t.integer "guests", default: 1
     t.date "check_in"
     t.date "check_out"
     t.datetime "created_at", null: false

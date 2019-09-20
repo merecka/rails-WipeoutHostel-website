@@ -18,9 +18,13 @@ class SessionsController < ApplicationController
           u.name = auth['info']['name']
           u.email = auth['info']['email']
           u.image = auth['info']['image']
+          #Input a dummy telephone # to instantiate the User
+          u.telephone = "0123456789"
+          #Input a dummy password to instantiate the User
           u.password = "password"
           u.password_confirmation = "password"
         end
+        #Render the User form to allow the User to enter their telephone and chosen password
         render :"users/edit"
         session[:current_user_id] = @user.id
       end 

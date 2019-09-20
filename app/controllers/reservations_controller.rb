@@ -45,35 +45,40 @@ class ReservationsController < ApplicationController
   end
 
   def create
+    #Creates initial Reservation from Rooms#Show view page form
     @reservation = Reservation.create(reservation_params)
     @room = Room.find_by(id: params[:reservation][:room_id])
     @user = User.find_by(id: params[:reservation][:user_id])
-    if @reservation.guests == nil || @reservation.check_in == nil || @reservation.check_out == nil
-      # Renders the edit Reservation form if any of the above attributes are nil
-      render :edit
-    else
-      # Redirects to the Reservations's show page
-      redirect_to reservation_path(@reservation)
-    end
+    # if @reservation.guests == nil || @reservation.check_in == nil || @reservation.check_out == nil
+    # Renders the edit Reservation form for the user to finish filling out the Reservation details
+    render :edit
   end
 
   def edit
-    if current_user.admin == true
+    #Only Admins can edit Reservations
       @user = current_user
 	    @reservation = Reservation.find_by(id: params[:id])
       @room = @reservation.room
-    else
-      redirect_to reservations_path
-    end
+      render :edit
   end
 
   def update
   	@reservation = Reservation.find_by(id: params[:id])
+    @room = Room.find_by(id: reservation_params[:room_id])
   	@reservation.update(user_id: reservation_params[:user_id], room_id: reservation_params[:room_id], guests: reservation_params[:guests], check_in: reservation_params[:check_in], check_out: reservation_params[:check_out], discount: reservation_params[:discount])
-  	days = (@reservation.check_out - @reservation.check_in).to_i
-    total_cost = @reservation.room.cost * days * (1-@reservation.discount)
-    @reservation.update(total: total_cost)
-    redirect_to reservation_path(@reservation)
+    if @reservation.check_in != nil && @reservation.check_out != nil
+      @reservation.update(total: helpers.total_cost(@reservation))
+      if @reservation.valid?
+        flash[:success] = "You have sucessfully made your Reservation!"
+        redirect_to reservation_path(@reservation)
+      else
+        flash[:error] = "Please check your input data and try again."
+        redirect_to edit_reservation_path(@reservation)
+      end
+    else
+      flash[:error] = "Please input a valid Check-In and Check-Out date."
+      render :edit
+    end
   end
 
   def destroy

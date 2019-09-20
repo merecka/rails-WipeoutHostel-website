@@ -18,8 +18,8 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.find_or_create_by(user_params)
-    if @user
+    @user = User.create(user_params)
+    if @user.valid?
     	# Sets the User session and redirects to the User's show page
     	session[:current_user_id] = @user.id
     	redirect_to user_path(@user)

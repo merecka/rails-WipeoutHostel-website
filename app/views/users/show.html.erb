@@ -14,10 +14,14 @@
 
 <h4><%= link_to "View Reservations", user_reservations_path(current_user) %></h4>
 
-<h4><%= link_to "View User Accounts", users_path %></h4><br><br>
+
+
+<% if current_user.admin %>
+	<h4><%= link_to "View User Accounts", users_path %></h4>
+	<h4><%= link_to "Edit User Account", edit_user_path(@user) %></h4>
+	<h4><%= link_to "Delete User Account", @user, method: :delete, data: {confirm: "Are You Sure?" } %></h4>
+<% end %><br><br><br><br>
 
 <h4><%= link_to "Back to Your Account", user_path(current_user) %></h4>
-
-
 
 <%= link_to "Log Out", '/logout' %>

@@ -1,24 +1,9 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a reservation booking web app that I built for my friend's hostel website and also as my Rails Project for the Flatiron Software Engineering bootcamp.  This app was developed using Ruby on Rails and utilizes Rails 5.2.3 and an SQLite3 database.
 
-Things you may want to cover:
+The app is built on the foundation of using User accounts to book & view reservations.  User signup is done via manual form entry or via Facebook authentication login (using Omniauth).  An admin functionality was introduced to allow for the editing & deleting of various resources including User accounts, Reservations, Rooms, etc.  
 
-* Ruby version
+Ruby Version = 5.2.3
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Database = SQLite3

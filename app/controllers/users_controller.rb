@@ -39,8 +39,10 @@ class UsersController < ApplicationController
   end
 
   def destroy
-  	User.find_by(id: params[:id]).destroy
-  	redirect_to users_path
+    if current_user.admin
+    	User.find_by(id: params[:id]).destroy
+    	redirect_to users_path
+    end
   end
 
   private

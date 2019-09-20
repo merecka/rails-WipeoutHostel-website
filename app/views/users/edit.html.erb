@@ -40,4 +40,6 @@ Email: <%= @user.email %><br><br>
   <%= f.submit "Save Changes" %>
   <% end %>
 
+  <br><h4><%= link_to "Back to Your Account", user_path(current_user) %></h4>
+
 <% end %>

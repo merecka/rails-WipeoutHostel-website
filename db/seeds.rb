@@ -17,3 +17,9 @@ Room.create(name: "Room 1", occupancy: "4", cost: 50)
 Room.create(name: "Room 2", occupancy: "6", cost: 80)
 Room.create(name: "Room 3", occupancy: "8", cost: 100)
 Room.create(name: "Room 4", occupancy: "3", cost: 60)
+
+
+Reservation.create(user_id: "1", room_id: "1", guests: "2", check_in: "2020-05-01", check_out: "2020-06-01", discount: "0.0", total: "1500")
+Reservation.create(user_id: "1", room_id: "2", guests: "4", check_in: "2020-03-01", check_out: "2020-04-01", discount: "0.0", total: "2400")
+Reservation.create(user_id: "2", room_id: "3", guests: "3", check_in: "2020-06-01", check_out: "2020-07-01", discount: "0.0", total: "3000")
+Reservation.create(user_id: "2", room_id: "4", guests: "3", check_in: "2020-08-01", check_out: "2020-09-01", discount: "0.0", total: "1800")

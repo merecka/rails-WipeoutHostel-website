@@ -4,7 +4,7 @@
 
 <h3>Cost Per Night: $<%= @room.cost %></h3>
 
-<% if !@user.admin  %>
+<% if !current_user.admin  %>
 	<%= form_for @reservation do |f| %>
 		<%= f.hidden_field(:room_id, :value => @room.id) %>
 		<%= f.hidden_field(:user_id, :value => @user.id) %>
@@ -13,7 +13,7 @@
 <% end %>
 
 
-<% if @user.admin %>
+<% if current_user.admin %>
 	<h3>Current Reservations: </h3>
 	<ul>
 	<% @room.reservations.each do |reservation| %>

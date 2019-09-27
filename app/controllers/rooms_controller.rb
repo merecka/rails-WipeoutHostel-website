@@ -1,4 +1,5 @@
 class RoomsController < ApplicationController
+  before_action :current_room, only: [:show, :edit, :update]
 
   def index
   	@rooms = Room.all
@@ -6,9 +7,7 @@ class RoomsController < ApplicationController
 
   def show
   	if session[:current_user_id]
-      @user = current_user
       @reservation = Reservation.new
-  		@room = Room.find_by(id: params[:id])
       @rooms = Room.all
   	else
   		redirect_to '/login'
@@ -30,15 +29,14 @@ class RoomsController < ApplicationController
   end
 
   def edit
-    if current_user.admin == true
-	     @room = Room.find_by(id: params[:id])
+    #Only Admins can edit Rooms
+    if current_user.admin
     else
       redirect_to rooms_path
     end
   end
 
   def update
-  	@room = Room.find_by(id: params[:id])
   	@room.update(name: room_params[:name], occupancy: room_params[:occupancy], cost: room_params[:cost])
   	redirect_to room_path(@room)
   end
@@ -52,6 +50,10 @@ class RoomsController < ApplicationController
 
   def room_params
     params.require(:room).permit(:name, :occupancy, :cost)
+  end
+
+  def current_room
+    @room = Room.find_by(id: params[:id])
   end
 
 end

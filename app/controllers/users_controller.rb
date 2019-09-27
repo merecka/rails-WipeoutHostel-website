@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :locate_user, only: [:show, :edit, :update]
 
   def index
   	@users = User.all
@@ -11,7 +12,6 @@ class UsersController < ApplicationController
   def show
   	if session[:current_user_id]
   		@reservations = Reservation.all
-  		@user = User.find_by(id: params[:id])
   	else
   		redirect_to '/'
   	end
@@ -29,13 +29,22 @@ class UsersController < ApplicationController
   end
 
   def edit
-	@user = User.find_by(id: params[:id])
+    #Only Admins can edit User accounts
+    if current_user.admin
+    else
+      redirect_to user_path(current_user)
+    end
   end
 
   def update
-  	@user = User.find_by(id: params[:id])
   	@user.update(name: user_params[:name], email: user_params[:email], telephone: user_params[:telephone], password: user_params[:password], password_confirmation: user_params[:password_confirmation])
-    redirect_to user_path(@user)
+    if @user.valid?
+        flash[:success] = "You have sucessfully made your changes!"
+        redirect_to user_path(@user)
+    else
+        flash[:error] = "Changes were NOT successful.  Please check your input data and try again."
+        redirect_to edit_user_path(@user)
+    end
   end
 
   def destroy
@@ -51,4 +60,7 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :email, :telephone, :image, :uid, :password, :password_confirmation)
   end
 
+  def locate_user
+    @user = User.find_by(id: params[:id])
+  end
 end
